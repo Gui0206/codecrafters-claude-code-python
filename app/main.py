@@ -51,7 +51,37 @@ def main():
     # TODO: Uncomment the following line to pass the first stage
     print(chat.choices[0].message.content)
 
+    tool_calls = chat.choices[0].message.tool_calls
+    first_tool_call = tool_calls[0]
 
+    if first_tool_call:
+        name = first_tool_call.function.name
+        arguments = first_tool_call.function.arguments
+        
+    print(arguments)
+
+
+#   "choices": [
+#     {
+#       "index": 0,
+#       "message": {
+#         "role": "assistant",
+#         "content": None,
+#         "tool_calls": [
+#           {
+#             "id": "call_abc123",
+#             "type": "function",
+#             "function": {
+#               "name": "Read",
+#               "arguments": "{\"file_path\": \"/path/to/file.txt\"}"
+#             }
+#           }
+#         ]
+#       },
+#       "finish_reason": "tool_calls"
+#     }
+#   ]
+        
 
 if __name__ == "__main__":
     main()
