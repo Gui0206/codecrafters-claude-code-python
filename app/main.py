@@ -57,7 +57,7 @@ def main():
     if first_tool_call:
         name = first_tool_call.function.name
         arguments = first_tool_call.function.arguments
-        file_path = arguments['file_path']
+        file_path = arguments[0]
     print(file_path)
 
 
