@@ -56,7 +56,7 @@ def main():
     first_tool_call = tool_calls[0]
 
     if first_tool_call:
-        name = first_tool_call.function.name
+        first_tool_call = tool_calls[0]
         arguments = first_tool_call.function.arguments
         parsed_args = json.load(arguments)
         file_path = arguments['file_path']
