@@ -57,8 +57,8 @@ def main():
     if first_tool_call:
         name = first_tool_call.function.name
         arguments = first_tool_call.function.arguments
-        
-    print(arguments)
+        file_path = arguments['file_path']
+    print(file_path)
 
 
 #   "choices": [
