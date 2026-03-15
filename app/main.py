@@ -24,7 +24,7 @@ def main():
         tools= [
             {
                 "type": "function",
-                "funciton": {
+                "function": {
                     "name": "Read",
                     "description": "Read and returns the content of a file",
                     "parameters": {
