@@ -1,6 +1,7 @@
 import argparse
 import os
 import sys
+import json
 
 from openai import OpenAI
 
@@ -57,7 +58,8 @@ def main():
     if first_tool_call:
         name = first_tool_call.function.name
         arguments = first_tool_call.function.arguments
-        file_path = arguments[0]
+        parsed_args = json.load(arguments)
+        file_path = arguments['file_path']
     print(file_path)
 
 
