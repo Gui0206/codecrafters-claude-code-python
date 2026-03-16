@@ -53,8 +53,8 @@ def main():
     if chat.choice[0].message.content:
         print(chat.choices[0].message.content)
 
-    tool_calls = chat.choices[0].message.tool_calls
-    first_tool_call = tool_calls[0]
+    # tool_calls = chat.choices[0].message.tool_calls
+    # first_tool_call = tool_calls[0]
 
     
 
@@ -63,7 +63,6 @@ def main():
     #     arguments = first_tool_call.function.arguments
     #     parsed_args = json.load(arguments)
         
-    print(parsed_args)
 
 
 #   "choices": [
