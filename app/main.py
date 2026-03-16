@@ -49,14 +49,18 @@ def main():
     # You can use print statements as follows for debugging, they'll be visible when running tests.
     print("Logs from your program will appear here!", file=sys.stderr)
 
-    # TODO: Uncomment the following line to pass the first stage
     if chat.choices[0].message.content:
         print(chat.choices[0].message.content)
 
     for tc in chat.choices[0].message.tool_calls or []:
         if tc.function.name == "Read":
-            with open(args["file_path"]) as f:
-                print(f.read())
+            arguments = json.loads(tc.function.arguments)
+
+            file_path = arguments.get("file_path")
+
+            if file_path:
+                with open(file_path) as f:
+                    print(f.read())
 
     # tool_calls = chat.choices[0].message.tool_calls
     # first_tool_call = tool_calls[0]
