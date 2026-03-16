@@ -18,9 +18,11 @@ def main():
 
     connection = call_lm(messages)
 
-
-    print(connection.tool_calls)
-    #while connection.tool_calls:
+    while connection.tool_calls:
+        messages.append(connection)
+        for tool_call in connection.tool_calls:
+            messages.append(exec_tool_call(tool_call))
+        connection = call_lm(messages)
 
 def call_lm(messages):
     if not API_KEY:
