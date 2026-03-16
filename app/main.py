@@ -19,9 +19,12 @@ def main():
 
     client = OpenAI(api_key=API_KEY, base_url=BASE_URL)
 
+    messages=[{"role": "user", "content": args.p}]
+
+
     chat = client.chat.completions.create(
         model="anthropic/claude-haiku-4.5",
-        messages=[{"role": "user", "content": args.p}],
+        messages=messages,
         tools= [
             {
                 "type": "function",
@@ -50,6 +53,8 @@ def main():
     print("Logs from your program will appear here!", file=sys.stderr)
 
     print("hellooooo")
+
+    print(client)
 
     for tc in chat.choices[0].message.tool_calls or []:
         if tc.function.name == "Read":
