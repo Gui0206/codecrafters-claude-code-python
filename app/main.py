@@ -21,7 +21,8 @@ def main():
     while connection.tool_calls:
         messages.append(connection)
         for tool_call in connection.tool_calls:
-            messages.append(exec_tool_call(tool_call))
+            result = exec_tool_call(tool_call)
+            messages.append(result)
         connection = call_lm(messages)
 
 def call_lm(messages):
@@ -60,15 +61,20 @@ def call_lm(messages):
     return chat.choices[0].message
 
 def exec_tool_call(tool_call):
-    for tc in tool_call.choices[0].message.tool_calls or []:
-        if tc.function.name == "Read":
-            arguments = json.loads(tc.function.arguments)
-
+    if tool_call.function.name == "Read":
+            arguments = json.loads(tool_call.function.arguments)
             file_path = arguments.get("file_path")
-
+            
             if file_path:
-                with open(file_path) as f:
-                    print(f.read())
+                with open(file_path, 'r') as f:
+                    content = f.read()
+                    
+                return {
+                    "tool_call_id": tool_call.id,
+                    "role": "tool",
+                    "name": "Read",
+                    "content": content
+                }
 
 if __name__ == "__main__":
     main()
