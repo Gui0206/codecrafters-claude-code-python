@@ -62,39 +62,5 @@ def main():
                 with open(file_path) as f:
                     print(f.read())
 
-    # tool_calls = chat.choices[0].message.tool_calls
-    # first_tool_call = tool_calls[0]
-
-    
-
-    # if first_tool_call:
-    #     first_tool_call = tool_calls[0]
-    #     arguments = first_tool_call.function.arguments
-    #     parsed_args = json.load(arguments)
-        
-
-
-#   "choices": [
-#     {
-#       "index": 0,
-#       "message": {
-#         "role": "assistant",
-#         "content": None,
-#         "tool_calls": [
-#           {
-#             "id": "call_abc123",
-#             "type": "function",
-#             "function": {
-#               "name": "Read",
-#               "arguments": "{\"file_path\": \"/path/to/file.txt\"}"
-#             }
-#           }
-#         ]
-#       },
-#       "finish_reason": "tool_calls"
-#     }
-#   ]
-        
-
 if __name__ == "__main__":
     main()
