@@ -14,7 +14,7 @@ def main():
     p.add_argument("-p", required=True)
     args = p.parse_args()
 
-    messages=[{"role": "user", "content": args.p}]
+    messages=[{"role": "user", "content": args.p},exec_tool_call()]
 
     connection = call_lm(messages)
 
