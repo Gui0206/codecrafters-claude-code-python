@@ -25,6 +25,9 @@ def main():
             messages.append(result)
         connection = call_lm(messages)
 
+    if connection.content:
+        print(connection.content)
+
 def call_lm(messages):
     if not API_KEY:
         raise RuntimeError("OPENROUTER_API_KEY is not set")
