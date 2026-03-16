@@ -54,7 +54,7 @@ def main():
 
     print("hellooooo")
 
-    print(client)
+    print(chat)
 
     for tc in chat.choices[0].message.tool_calls or []:
         if tc.function.name == "Read":
