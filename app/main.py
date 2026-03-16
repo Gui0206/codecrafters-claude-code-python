@@ -50,7 +50,13 @@ def main():
     print("Logs from your program will appear here!", file=sys.stderr)
 
     # TODO: Uncomment the following line to pass the first stage
-    ##print(chat.choices[0].message.content)
+    if chat.choices[0].message.content:
+        print(chat.choices[0].message.content)
+
+    for tc in chat.choices[0].message.tool_calls or []:
+        if tc.function.name == "Read":
+            with open(args["file_path"]) as f:
+                print(f.read())
 
     # tool_calls = chat.choices[0].message.tool_calls
     # first_tool_call = tool_calls[0]
