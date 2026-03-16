@@ -50,7 +50,7 @@ def main():
     print("Logs from your program will appear here!", file=sys.stderr)
 
     if chat.choices[0].message.content:
-        print(chat.choices[0].message.content)
+        print(chat.choices[0].message.content, file=sys.stderr)
 
     for tc in chat.choices[0].message.tool_calls or []:
         if tc.function.name == "Read":
@@ -64,3 +64,27 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
+# {
+#   "choices": [
+#     {
+#       "index": 0,
+#       "message": {
+#         "role": "assistant",
+#         "content": null,
+#         "tool_calls": [
+#           {
+#             "id": "call_abc123",
+#             "type": "function",
+#             "function": {
+#               "name": "Read",
+#               "arguments": "{\"file_path\": \"/path/to/file.txt\"}"
+#             }
+#           }
+#         ]
+#       },
+#       "finish_reason": "tool_calls"
+#     }
+#   ]
+# }
