@@ -14,9 +14,11 @@ def main():
     p.add_argument("-p", required=True)
     args = p.parse_args()
 
-    messages=[{"role": "user", "content": args.p},exec_tool_call()]
+    messages=[{"role": "user", "content": args.p}]
 
     connection = call_lm(messages)
+
+    print(connection)
 
 def call_lm(messages):
     if not API_KEY:
