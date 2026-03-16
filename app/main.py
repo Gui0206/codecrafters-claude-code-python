@@ -50,17 +50,20 @@ def main():
     print("Logs from your program will appear here!", file=sys.stderr)
 
     # TODO: Uncomment the following line to pass the first stage
-    print(chat.choices[0].message.content)
+    if chat.choice[0].message.content:
+        print(chat.choices[0].message.content)
 
     tool_calls = chat.choices[0].message.tool_calls
     first_tool_call = tool_calls[0]
 
-    if first_tool_call:
-        first_tool_call = tool_calls[0]
-        arguments = first_tool_call.function.arguments
-        parsed_args = json.load(arguments)
-        file_path = arguments['file_path']
-    print(file_path)
+    
+
+    # if first_tool_call:
+    #     first_tool_call = tool_calls[0]
+    #     arguments = first_tool_call.function.arguments
+    #     parsed_args = json.load(arguments)
+        
+    print(parsed_args)
 
 
 #   "choices": [
