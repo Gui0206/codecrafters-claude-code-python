@@ -14,13 +14,15 @@ def main():
     p.add_argument("-p", required=True)
     args = p.parse_args()
 
+    messages=[{"role": "user", "content": args.p}]
+
+    connection = call_lm(messages)
+
+def call_lm(messages):
     if not API_KEY:
         raise RuntimeError("OPENROUTER_API_KEY is not set")
 
     client = OpenAI(api_key=API_KEY, base_url=BASE_URL)
-
-    messages=[{"role": "user", "content": args.p}]
-
 
     chat = client.chat.completions.create(
         model="anthropic/claude-haiku-4.5",
@@ -48,15 +50,11 @@ def main():
 
     if not chat.choices or len(chat.choices) == 0:
         raise RuntimeError("no choices in response")
+    
+    return chat.choices[0].message
 
-    # You can use print statements as follows for debugging, they'll be visible when running tests.
-    print("Logs from your program will appear here!", file=sys.stderr)
-
-    print("hellooooo")
-
-    print(chat)
-
-    for tc in chat.choices[0].message.tool_calls or []:
+def exec_tool_call(tool_call):
+    for tc in tool_call.choices[0].message.tool_calls or []:
         if tc.function.name == "Read":
             arguments = json.loads(tc.function.arguments)
 
@@ -68,27 +66,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-
-# {
-#   "choices": [
-#     {
-#       "index": 0,
-#       "message": {
-#         "role": "assistant",
-#         "content": null,
-#         "tool_calls": [
-#           {
-#             "id": "call_abc123",
-#             "type": "function",
-#             "function": {
-#               "name": "Read",
-#               "arguments": "{\"file_path\": \"/path/to/file.txt\"}"
-#             }
-#           }
-#         ]
-#       },
-#       "finish_reason": "tool_calls"
-#     }
-#   ]
-# }
